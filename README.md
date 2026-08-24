@@ -2,9 +2,9 @@
 
 A desktop extension for VLC media player that retunes playback referenced to A = 440 Hz down to A = 432 Hz.
 
-The extension sets the playback rate to `432 / 440` and disables VLC's pitch-preserving time-stretch filter. Pitch and tempo therefore change together, as they would when slowing an analogue recording.
+The extension sets the playback rate to `432 / 440` and disables VLC's pitch-preserving time-stretch filter. Pitch and tempo change together, as they would when slowing an analogue recording.
 
-> **A brief statement of intent:** This project does not insist that 432 Hz opens portals, repairs houseplants, or causes the universe to reveal its source code. It simply observes that `4 + 3 + 2 = 9`, considers that extremely pleasing, and provides a button for people who would rather inhabit a world where funny numbers are allowed to matter. Choose your world responsibly—or at least with a decent pair of headphones.
+> **Statement of intent:** This project does not claim that 432 Hz opens portals, repairs houseplants, or reveals the universe's source code. It observes that `4 + 3 + 2 = 9`, finds that arithmetic pleasing, and supplies a button for people who prefer a world where such numbers are allowed to matter. Choose your reference frequency, or at least use headphones that can resolve the difference.
 
 ## Contents
 
@@ -26,9 +26,9 @@ The extension sets the playback rate to `432 / 440` and disables VLC's pitch-pre
 
 ## Features
 
-- Applies the precise playback rate `0.9818181818181818x`.
+- Applies the exact playback rate `0.9818181818181818x`.
 - Disables VLC's pitch correction so the rate change also changes pitch.
-- Refreshes the selected audio track so the new audio-filter configuration can take effect during current playback.
+- Refreshes the selected audio track so the new audio-filter configuration takes effect during current playback.
 - Displays the current playback rate and pitch-correction state.
 - Restores normal `1.0x` playback independently of the pitch-correction setting.
 - Re-enables VLC's normal pitch correction on request.
@@ -43,11 +43,11 @@ The extension sets the playback rate to `432 / 440` and disables VLC's pitch-pre
 - Tested with VLC `3.0.23` on Windows.
 - The VLC 4 compatibility path is implemented but has not been verified against a production VLC 4 release.
 
-The requested rate may not be supported by every network protocol, renderer, or output mode. Normal local audio and video files are the intended use case.
+The requested rate may not be supported by every network protocol, renderer, or output mode. Local audio and video files are the intended use case.
 
 ## Installation
 
-The easiest installation method is to download the ZIP from the repository's **Releases** page, extract it, and run the installer for your operating system. The ZIP is a regular ZIP archive—not a renamed TAR file, not Gzip wearing a novelty moustache, and not an interpretive dance about compression.
+Download the ZIP from the repository's **Releases** page, extract it, and run the installer for your operating system. The ZIP is a regular ZIP archive, not a renamed TAR file or a Gzip archive with a different extension.
 
 You can also download [`VLC-432Hz-tuning.lua`](VLC-432Hz-tuning.lua) and copy it manually into VLC's per-user Lua extension directory.
 
@@ -59,10 +59,10 @@ You can also download [`VLC-432Hz-tuning.lua`](VLC-432Hz-tuning.lua) and copy it
 | Linux | `${XDG_DATA_HOME:-$HOME/.local/share}/vlc/` | `${XDG_DATA_HOME:-$HOME/.local/share}/vlc/lua/extensions/` |
 | macOS | `$HOME/Library/Application Support/org.videolan.vlc/` | `$HOME/Library/Application Support/org.videolan.vlc/lua/extensions/` |
 
-The short version is: open your **VLC user folder**, create a folder named `lua` inside it, then create a folder named `extensions` inside `lua`. Copy `VLC-432Hz-tuning.lua` into that final `extensions` folder.
+Open your **VLC user folder**, create a folder named `lua` inside it, then create a folder named `extensions` inside `lua`. Copy `VLC-432Hz-tuning.lua` into that final `extensions` folder.
 
 > [!NOTE]
-> The `lua` and `extensions` folders often do not exist in a standard VLC installation. This is normal. Create both folders manually when they are missing. The final structure must be `vlc/lua/extensions/VLC-432Hz-tuning.lua`.
+> The `lua` and `extensions` folders often do not exist in a standard VLC installation. Create both folders manually when they are missing. The final structure must be `vlc/lua/extensions/VLC-432Hz-tuning.lua`.
 
 ### Windows
 
@@ -93,7 +93,7 @@ Complete destination path:
 %APPDATA%\vlc\lua\extensions\VLC-432Hz-tuning.lua
 ```
 
-`%APPDATA%` is expanded by Windows to the current user's roaming application-data directory. No hard-coded username is required, and nobody has to remember where Windows hid the folder this week.
+`%APPDATA%` expands to the current user's roaming application-data directory. No hard-coded username is required.
 
 PowerShell installation example:
 
@@ -112,7 +112,7 @@ copy "VLC-432Hz-tuning.lua" "%APPDATA%\vlc\lua\extensions\"
 
 ### Linux
 
-VLC normally follows the XDG user-data location. The following shell variable respects `XDG_DATA_HOME` when it is defined and falls back to the standard path under `$HOME`:
+VLC follows the XDG user-data location. The following shell variable respects `XDG_DATA_HOME` when defined and falls back to the standard path under `$HOME`:
 
 Automatic installation from an extracted release:
 
@@ -148,16 +148,16 @@ The installer creates the following folder when necessary and copies the extensi
 $HOME/Library/Application Support/org.videolan.vlc/lua/extensions/
 ```
 
-Manual installation follows the same rule: create `lua/extensions` inside `$HOME/Library/Application Support/org.videolan.vlc/`, then copy `VLC-432Hz-tuning.lua` into `extensions`.
+Manual installation: create `lua/extensions` inside `$HOME/Library/Application Support/org.videolan.vlc/`, then copy `VLC-432Hz-tuning.lua` into `extensions`.
 
 ### Other platforms
 
-Use VLC's user data directory for the current account rather than writing a literal username into the path. Place the Lua file directly in that installation's `lua/extensions` directory and consult the VLC package documentation when necessary.
+Use VLC's user data directory for the current account. Place the Lua file directly in that installation's `lua/extensions` directory. Consult the VLC package documentation for the exact path on your platform.
 
 > [!IMPORTANT]
-> Copy the Lua file into the extension directory, not the entire repository folder. VLC 3 scans files directly inside `lua/extensions` and does not normally discover extensions nested in project subdirectories.
+> Copy the Lua file into the extension directory, not the entire repository folder. VLC 3 scans files directly inside `lua/extensions` and does not discover extensions nested in project subdirectories.
 
-Restart VLC after installing or updating the file. The extension should then appear under **View > 432 Hz Tuning**.
+Restart VLC after installing or updating the file. The extension appears under **View > 432 Hz Tuning**.
 
 ## Release package contents
 
@@ -173,7 +173,7 @@ Every generated release ZIP contains:
 | `README.md` | Documentation |
 | `VERSION` | Package version |
 
-All installers copy the same Lua file. They do not download software, request administrator access, edit VLC binaries, or perform the traditional installer ritual of adding seventeen mysterious registry keys.
+All installers copy the same Lua file. They do not download software, request administrator access, edit VLC binaries, or write registry keys.
 
 ## Usage
 
@@ -183,15 +183,13 @@ All installers copy the same Lua file. They do not download software, request ad
 4. Click **Apply 432 Hz tuning**.
 5. Confirm that the status area reports that 432 Hz tuning is active.
 
-A short audio interruption is expected when the extension refreshes the selected audio track. Playback position is not intentionally changed.
+A short audio interruption occurs when the extension refreshes the selected audio track. Playback position is not changed.
 
-If no media is playing, the extension can still set the player rate and pitch-correction preference. New playback will use those settings.
+If no media is playing, the extension can still set the player rate and pitch-correction preference. New playback uses those settings.
 
 ## Controls
 
 ### Apply 432 Hz tuning
-
-Performs the following operations:
 
 1. Disables `audio-time-stretch` in VLC's active configuration.
 2. Applies the same setting to the active audio-output object when one exists.
@@ -200,11 +198,11 @@ Performs the following operations:
 
 ### Restore normal rate
 
-Sets the playback rate to `1.0x`. It deliberately leaves the pitch-correction preference unchanged.
+Sets the playback rate to `1.0x`. It leaves the pitch-correction preference unchanged.
 
 ### Enable pitch correction
 
-Re-enables VLC's `audio-time-stretch` setting. If audio refresh is selected, the current track is restarted so the change can take effect immediately.
+Re-enables VLC's `audio-time-stretch` setting. If audio refresh is selected, the current track is restarted so the change takes effect immediately.
 
 ### Refresh status
 
@@ -212,37 +210,35 @@ Reads the current rate and time-stretch setting from VLC and updates the dialog.
 
 ## Why 432?
 
-The practical answer is simple: some listeners and musicians want to hear material shifted from an A = 440 Hz reference to A = 432 Hz. This extension provides a precise and reversible way to do that in VLC without modifying the source file.
+Some listeners and musicians want to hear material shifted from an A = 440 Hz reference to A = 432 Hz. This extension provides a precise and reversible way to do that in VLC without modifying the source file.
 
-The less practical answer is that 432 is a wonderfully entertaining integer:
+432 is also an entertaining integer:
 
-- `4 + 3 + 2 = 9`.
-- `432 = 48 × 9`.
-- `432 = 2⁴ × 3³`, which is an unnecessarily handsome factorization.
-- A full circle contains 360 degrees, which is unrelated but has also been invited to the numerology party.
+- `4 + 3 + 2 = 9`
+- `432 = 48 × 9`
+- `432 = 2⁴ × 3³`
+- A full circle contains 360 degrees, which is unrelated but has been invited to the same arithmetic discussion.
 
-None of this proves an acoustic, medical, historical, metaphysical, agricultural, or interdimensional claim. It proves only that integers can have personality and that software is more enjoyable when it leaves room for harmless curiosity.
+None of this proves an acoustic, medical, historical, metaphysical, agricultural, or interdimensional claim. It shows only that integers can have structure and that software is more enjoyable when it leaves room for harmless curiosity.
 
-If 440 Hz is your world, the **Restore normal rate** button is right there. If 432 Hz is your world, welcome; the arithmetic has already been done.
+If 440 Hz is preferred, use the **Restore normal rate** button. If 432 Hz is preferred, the ratio is already calculated.
 
 ## Technical explanation
 
 ### Playback rate
 
-To map a recording tuned to A = 440 Hz onto A = 432 Hz, every frequency must be multiplied by the same ratio:
+To map a recording tuned to A = 440 Hz onto A = 432 Hz, every frequency is multiplied by the same ratio:
 
 ```text
 rate = 432 / 440
      = 0.9818181818181818
 ```
 
-For example:
+Example:
 
 ```text
 440 Hz * 0.9818181818181818 = 432 Hz
 ```
-
-No crystals are involved in this multiplication.
 
 The corresponding pitch displacement is:
 
@@ -251,13 +247,13 @@ cents = 1200 * log2(432 / 440)
       = -31.766653633429 cents
 ```
 
-Playback speed is approximately `1.8182%` slower, while total duration becomes approximately `1.8519%` longer.
+Playback speed is approximately `1.8182%` slower. Total duration becomes approximately `1.8519%` longer.
 
 ### Pitch correction versus audio resampling
 
 VLC calls its pitch-preserving playback-speed feature **time stretching audio**. When `audio-time-stretch` is enabled, VLC inserts the `scaletempo` filter and attempts to keep pitch unchanged while the rate changes.
 
-This extension disables `audio-time-stretch` because the intended result is a real pitch change. It does **not** disable VLC's general audio resampler. The resampler remains necessary for ordinary sample-rate conversion, device compatibility, synchronization, and rate-dependent audio processing.
+This extension disables `audio-time-stretch` because the intended result is a real pitch change. It does not disable VLC's general audio resampler. The resampler remains necessary for ordinary sample-rate conversion, device compatibility, synchronization, and rate-dependent audio processing.
 
 ### Live audio refresh
 
@@ -266,7 +262,7 @@ Changing `audio-time-stretch` updates VLC's configuration, but an audio filter c
 - VLC 3: temporarily sets the input's `audio-es` selection to disabled, then restores the original track ID.
 - VLC 4: toggles the selected audio track through the player API.
 
-If the refresh is unavailable or fails, stop and replay the media once. The new filter configuration will then be used when VLC creates the next audio pipeline.
+If the refresh is unavailable or fails, stop and replay the media once. The new filter configuration is used when VLC creates the next audio pipeline.
 
 ## Configuration changes
 
@@ -277,9 +273,9 @@ The extension changes two pieces of VLC state:
 | Playback rate | `0.9818181818181818x` | Click **Restore normal rate** |
 | `audio-time-stretch` | Disabled | Click **Enable pitch correction** |
 
-Closing or deactivating the extension does not automatically undo these changes. This is intentional: playback should not change merely because the dialog was closed.
+Closing or deactivating the extension does not undo these changes. Playback should not change merely because the dialog was closed.
 
-In other words, closing the window does not collapse the waveform back to 440 Hz. Use the restoration controls when you want to return VLC to its previous, numerically conventional duties.
+Use the restoration controls when you want to return VLC to 1.0x rate and normal pitch correction.
 
 ## Limitations
 
@@ -375,7 +371,7 @@ macOS provides `shasum -a 256` by default if `sha256sum` is unavailable.
 
 ### Manual workflow run
 
-Manual runs use the version stored in `VERSION` and upload a workflow artifact without creating a GitHub Release. A tag is deliberately required for publication; releases should have names, and numbers deserve ceremonial occasions.
+Manual runs use the version stored in `VERSION` and upload a workflow artifact without creating a GitHub Release. A tag is required for publication.
 
 ## Development and validation
 
@@ -416,7 +412,7 @@ Version `1.0.0` was validated by the VLC 3.0.23 extension loader on Windows. VLC
 
 The extension performs no network requests, telemetry, analytics, media scanning, or file modification. It communicates only with the active VLC instance through VLC's built-in Lua API.
 
-It also does not transmit the number 9 to a remote numerology service. Such a service does not exist, and if it did, this extension would remain politely offline.
+It does not transmit the number 9 to a remote numerology service. Such a service does not exist, and if it did, this extension would remain offline.
 
 ## References
 

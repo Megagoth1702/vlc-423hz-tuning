@@ -1,14 +1,25 @@
 -- VLC 432 Hz Tuning
 -- Retunes material referenced to A=440 Hz down to A=432 Hz by slowing
 -- playback to 432/440 while disabling VLC's pitch-preserving time stretch.
+-- Copyright (c) 2026 Andrej Schmitt
+-- SPDX-License-Identifier: MIT
 
-local EXTENSION_VERSION = "1.0.0"
+local EXTENSION_VERSION = "1.0.1"
 -- Keep these precomputed: VLC's extension scanner does not expose the math
 -- library while it evaluates the script's top level.
 local TARGET_RATE = 0.9818181818181818
 local NORMAL_RATE = 1.0
 local TARGET_CENTS = -31.76665363342928
 local DURATION_CHANGE = 1.851851851851852
+
+-- VLC exposes size hints for individual dialog widgets, but no API for a
+-- hard window-level maximum. Compact hints keep the initial dialog close to
+-- its useful minimum while leaving normal user resizing available.
+local DIALOG_WIDTH_HINT = 360
+local PANEL_WIDTH_HINT = 170
+local HEADER_HEIGHT_HINT = 60
+local PANEL_HEIGHT_HINT = 80
+local STATUS_HEIGHT_HINT = 55
 
 local dlg = nil
 local current_rate_label = nil
@@ -275,7 +286,7 @@ local function create_dialog()
         "<h2>Retune A = 440 Hz to A = 432 Hz</h2>" ..
         "<p>This slows playback slightly and disables VLC's pitch-preserving time stretch, " ..
         "so pitch and tempo move together.</p>",
-        1, 1, 4, 1
+        1, 1, 4, 1, DIALOG_WIDTH_HINT, HEADER_HEIGHT_HINT
     )
 
     dlg:add_html(
@@ -286,14 +297,14 @@ local function create_dialog()
             TARGET_CENTS,
             DURATION_CHANGE
         ),
-        1, 2, 2, 2
+        1, 2, 2, 2, PANEL_WIDTH_HINT, PANEL_HEIGHT_HINT
     )
 
     dlg:add_html(
         "<p><b>Why pitch correction must be off</b><br>" ..
         "VLC's time-stretch filter normally keeps pitch unchanged when speed changes. " ..
         "This extension disables that filter; it does not disable the general-purpose audio resampler.</p>",
-        3, 2, 2, 2
+        3, 2, 2, 2, PANEL_WIDTH_HINT, PANEL_HEIGHT_HINT
     )
 
     current_rate_label = dlg:add_label("Current playback rate: checking...", 1, 4, 4, 1)
@@ -312,7 +323,7 @@ local function create_dialog()
 
     status_html = dlg:add_html(
         "<p><b>Ready.</b> Start playback, then choose <i>Apply 432 Hz tuning</i>.</p>",
-        1, 9, 4, 1
+        1, 9, 4, 1, DIALOG_WIDTH_HINT, STATUS_HEIGHT_HINT
     )
 
     refresh_ui()

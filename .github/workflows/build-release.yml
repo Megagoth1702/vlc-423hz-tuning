@@ -43,6 +43,7 @@ jobs:
           $releaseFiles = @(
             "VLC-432Hz-tuning.lua",
             "README.md",
+            "LICENSE",
             "VERSION",
             "install-windows.bat",
             "install-windows.ps1",

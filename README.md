@@ -1,5 +1,7 @@
 # VLC 432 Hz Tuning
 
+![VLC 432 Hz Tuning extension window](img/VLC-432hz-tuning.png)
+
 A desktop extension for VLC media player that retunes playback referenced to A = 440 Hz down to A = 432 Hz.
 
 The extension sets the playback rate to `432 / 440` and disables VLC's pitch-preserving time-stretch filter. Pitch and tempo change together, as they would when slowing an analogue recording.
@@ -171,6 +173,7 @@ Every generated release ZIP contains:
 | `install-linux.sh` | XDG-aware Linux installer |
 | `install-macos.sh` | Per-user macOS installer |
 | `README.md` | Documentation |
+| `LICENSE` | MIT License |
 | `VERSION` | Package version |
 
 All installers copy the same Lua file. They do not download software, request administrator access, edit VLC binaries, or write registry keys.
@@ -340,15 +343,15 @@ GitHub wraps workflow artifacts in its own download container. Inside it are the
 Set the desired version in `VERSION`, commit it, then create and push a matching tag:
 
 ```sh
-git tag v1.0.0
-git push origin v1.0.0
+git tag v1.0.1
+git push origin v1.0.1
 ```
 
-For a `v1.0.0` tag, the workflow publishes:
+For a `v1.0.1` tag, the workflow publishes:
 
 ```text
-vlc-432hz-tuning-1.0.0.zip
-vlc-432hz-tuning-1.0.0.zip.sha256
+vlc-432hz-tuning-1.0.1.zip
+vlc-432hz-tuning-1.0.1.zip.sha256
 ```
 
 Tagged runs automatically create a GitHub Release with generated release notes. If the release already exists, rerunning the workflow replaces its two downloadable assets.
@@ -358,13 +361,13 @@ The workflow uses GitHub's automatically provided token. If release publication 
 The `.sha256` file lets users verify that their download matches the archive built by GitHub. On Windows, display the downloaded ZIP's hash with:
 
 ```powershell
-Get-FileHash .\vlc-432hz-tuning-1.0.0.zip -Algorithm SHA256
+Get-FileHash .\vlc-432hz-tuning-1.0.1.zip -Algorithm SHA256
 ```
 
 On Linux or macOS, verify it from the directory containing both release files with:
 
 ```sh
-sha256sum -c vlc-432hz-tuning-1.0.0.zip.sha256
+sha256sum -c vlc-432hz-tuning-1.0.1.zip.sha256
 ```
 
 macOS provides `shasum -a 256` by default if `sha256sum` is unavailable.
@@ -384,6 +387,7 @@ vlc-432hz-tuning/
 |       `-- build-release.yml
 |-- .gitattributes
 |-- .gitignore
+|-- LICENSE
 |-- README.md
 |-- VERSION
 |-- VLC-432Hz-tuning.lua
@@ -406,7 +410,7 @@ The rate abstraction uses `vlc.var` and the playlist object on VLC 3, then selec
 
 The numerical constants are precomputed at the script's top level. VLC 3 evaluates extension descriptors in a restricted scanner environment where the standard `math` table is not available during discovery.
 
-Version `1.0.0` was validated by the VLC 3.0.23 extension loader on Windows. VLC detected the script and its menu capability without Lua warnings or load errors.
+Version `1.0.1` was validated by the VLC 3.0.23 extension loader on Windows. VLC detected the script and its menu capability without Lua warnings or load errors.
 
 ## Privacy
 
@@ -423,4 +427,4 @@ It does not transmit the number 9 to a remote numerology service. Such a service
 
 ## License
 
-No open-source license has been selected for this project. Add a license file before accepting third-party contributions or redistributing modified versions under explicit license terms.
+This project is released under the [MIT License](LICENSE). You may use, copy, modify, merge, publish, distribute, sublicense, and sell copies, provided that the copyright and license notice remain included. In less ceremonial language: take it, improve it, remix it, and have fun; just keep the tiny legal receipt attached.
